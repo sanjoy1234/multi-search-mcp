@@ -1,0 +1,4 @@
+fastmcp>=2.2.0 
+python-dotenv
+httpx
+google-search-results
