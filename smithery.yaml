@@ -4,28 +4,20 @@ startCommand:
     type: object
     required:
       - googleApiKey
-      - googleCx
       - braveApiKey
     properties:
       googleApiKey:
         type: string
-        description: Google API Key for Custom Search
-      googleCx:
-        type: string
-        description: Google Search Engine ID
       braveApiKey:
         type: string
-        description: Brave News Search subscription token
       duckApiKey:
         type: string
-        description: (Optional) DuckDuckGo API Key
   commandFunction: |-
     (config) => ({
       command: 'python3',
       args: ['main.py'],
       env: {
         GOOGLE_API_KEY: config.googleApiKey,
-        GOOGLE_CX: config.googleCx,
         BRAVE_API_KEY: config.braveApiKey,
         DUCK_API_KEY: config.duckApiKey || ''
       }
