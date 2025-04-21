@@ -1,4 +1,3 @@
-# smithery.yaml (at your repo root)
 startCommand:
   type: stdio
   configSchema:
@@ -8,20 +7,16 @@ startCommand:
     properties:
       braveApiKey:
         type: string
-        description: Your Brave News API subscription token
+        description: "Your Brave News API token"
       googleApiKey:
         type: string
         description: "(Optional) SerpApi Google API key"
-      duckApiKey:
-        type: string
-        description: "(Optional) DuckDuckGo API key"
   commandFunction: |
     (config) => ({
       command: "python3",
       args: ["main.py"],
       env: {
         BRAVE_API_KEY:  config.braveApiKey,
-        GOOGLE_API_KEY: config.googleApiKey || "",
-        DUCK_API_KEY:   config.duckApiKey  || ""
+        GOOGLE_API_KEY: config.googleApiKey || ""
       }
     })

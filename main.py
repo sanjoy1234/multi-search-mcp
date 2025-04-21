@@ -11,7 +11,7 @@ load_dotenv()
 
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 BRAVE_API_KEY  = os.getenv("BRAVE_API_KEY")
-DUCK_API_KEY   = os.getenv("DUCK_API_KEY")
+
 
 # Create your MCP server instance
 mcp = FastMCP("Multi-Search")
@@ -48,15 +48,11 @@ async def brave_search(query: str) -> str:
 # --- DuckDuckGo Instant Answer ---
 @mcp.tool()
 async def duck_search(query: str) -> str:
-    """Query DuckDuckGo Instant Answer API."""
-    url = "https://api.duckduckgo.com/"
+    """Query DuckDuckGo Instant Answer API (no key required)."""
     params = {"q": query, "format": "json", "no_html": 1, "skip_disambig": 1}
-    headers = {}
-    if DUCK_API_KEY:
-        headers["X-API-Key"] = DUCK_API_KEY
     async with httpx.AsyncClient() as client:
-        r = await client.get(url, params=params, headers=headers)
-        return r.text
+        resp = await client.get("https://api.duckduckgo.com/", params=params)
+        return resp.text
 
 # …include any existing weather & notes tools here…
 
